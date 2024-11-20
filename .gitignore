@@ -1,0 +1,37 @@
+# Ignorar el entorno virtual
+venv/
+.env/
+*.env
+
+# Ignorar archivos de compilación de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.log
+
+# Ignorar configuraciones de bases de datos locales
+db.sqlite3
+*.sqlite3
+
+# Ignorar configuraciones específicas de editores
+.vscode/
+.idea/
+*.swp
+
+# Ignorar archivos de configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar directorios de dependencias y compilación
+node_modules/
+dist/
+build/
+
+# Ignorar archivos estáticos generados automáticamente
+staticfiles/
+media/
+*.bak
+
+# Ignorar configuraciones de Docker (si se usa)
+*.pid
