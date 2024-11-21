@@ -1,0 +1,17 @@
+<!-- templates/products/product_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Listado de Productos</h2>
+  <ul>
+    {% for product in products %}
+      <li>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+        <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
+        - ${{ product.price }}
+        - Stock: {{ product.stock }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

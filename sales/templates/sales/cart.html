@@ -1,0 +1,31 @@
+<!-- templates/sales/cart.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Carrito de Compras</h2>
+  <form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+      </tr>
+      {% for item in cart_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.subtotal }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <p>Total: ${{ total }}</p>
+    <h3>Opciones de Entrega</h3>
+    <label><input type="radio" name="delivery_option" value="retiro" required> Retiro en Tienda</label><br>
+    <label><input type="radio" name="delivery_option" value="despacho"> Despacho a Domicilio</label>
+    <h3>Método de Pago</h3>
+    <label><input type="radio" name="payment_method" value="tarjeta" required> Tarjeta de Débito</label>
+    <button type="submit">Realizar Compra</button>
+  </form>
+{% endblock %}

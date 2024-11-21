@@ -1,0 +1,35 @@
+<!-- templates/sales/receipt.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Boleta Electrónica</title>
+    <style>
+        /* Estilos para el PDF */
+    </style>
+</head>
+<body>
+    <h1>Boleta Electrónica</h1>
+    <p>Número de Boleta: {{ sale.id }}</p>
+    <p>Fecha: {{ sale.date }}</p>
+    <p>Cliente: {{ sale.customer.username }}</p>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Total</th>
+        </tr>
+        {% for item in sale.saleitem_set.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.product.price }}</td>
+            <td>${{ item.quantity|floatformat:2|add:item.product.price|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Total a Pagar: ${{ sale.total_value }}</p>
+</body>
+</html>

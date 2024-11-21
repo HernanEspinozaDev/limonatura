@@ -1,0 +1,11 @@
+<!-- templates/sales/order_confirmation.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Confirmación de Pedido</h2>
+  <p>Gracias por tu compra, {{ sale.customer.username }}.</p>
+  <p>Número de Venta: {{ sale.id }}</p>
+  <p>Total Pagado: ${{ sale.total_value }}</p>
+  <a href="{% url 'download_receipt' sale.id %}">Descargar Boleta Electrónica</a>
+{% endblock %}
