@@ -1,9 +1,15 @@
 <!-- templates/products/product_list.html -->
-
 {% extends 'base.html' %}
 
 {% block content %}
   <h2>Listado de Productos</h2>
+
+  {% if user.is_authenticated %}
+    {% if user.role == 'admin' or user.role == 'seller' %}
+      <a href="{% url 'export_stock_excel' %}">Descargar Reporte de Stock (Excel)</a>
+    {% endif %}
+  {% endif %}
+
   <ul>
     {% for product in products %}
       <li>

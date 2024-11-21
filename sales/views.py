@@ -1,7 +1,7 @@
-# apps/sales/views.py
+# sales/views.py
 
 from django.shortcuts import render, redirect
-from apps.products.models import Product
+from products.models import Product
 from .models import Sale, SaleItem
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
@@ -55,7 +55,18 @@ def checkout(request):
         del request.session['cart']
         return redirect('order_confirmation', sale_id=sale.id)
     else:
-        return redirect('view_cart')
+        # Mostrar el resumen de la compra
+        cart = request.session.get('cart', {})
+        if not cart:
+            return redirect('product_list')
+        cart_items = []
+        total = 0
+        for product_id, quantity in cart.items():
+            product = Product.objects.get(id=product_id)
+            subtotal = product.price * quantity
+            total += subtotal
+            cart_items.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
+        return render(request, 'sales/checkout.html', {'cart_items': cart_items, 'total': total})
     
 @login_required
 def download_receipt(request, sale_id):

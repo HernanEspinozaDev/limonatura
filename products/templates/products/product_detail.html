@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ product.name }}</h2>
+  <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
+  <p>{{ product.description }}</p>
+  <p><strong>Precio:</strong> ${{ product.price }}</p>
+  <p><strong>Stock:</strong> {{ product.stock }}</p>
+  <a href="{% url 'add_to_cart' product.id %}">Añadir al Carrito</a>
+
+  {% if user.is_authenticated %}
+    {% if user.role == 'admin' %}
+      <a href="{% url 'product_update' product.id %}">Editar Producto</a>
+    {% endif %}
+  {% endif %}
+{% endblock %}

@@ -1,4 +1,4 @@
-# apps/users/forms.py
+# users/forms.py
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -23,3 +23,6 @@ class CustomUserCreationForm(UserCreationForm):
 def validar_rut(rut):
     # Implementa aquí la lógica de validación del RUT
     return True  # Retorna True si el RUT es válido
+
+class CustomAuthenticationForm(AuthenticationForm):
+    captcha = CaptchaField()

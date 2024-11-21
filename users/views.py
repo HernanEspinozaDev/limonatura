@@ -1,14 +1,13 @@
-# apps/users/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .forms import CustomUserCreationForm, AuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
 import openpyxl
 from django.http import HttpResponse
 from .models import CustomUser
+from sales.models import Sale  # Importa el modelo Sale
 
 def register(request):
     if request.method == 'POST':
@@ -23,9 +22,9 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        captcha = CaptchaField()
-        if form.is_valid() and captcha.validate(request.POST.get('captcha')):
+        form = CustomAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            # Autenticar y loguear al usuario
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
@@ -34,12 +33,16 @@ def user_login(request):
                 return redirect('index')
         messages.error(request, 'Usuario o contraseña incorrectos.')
     else:
-        form = AuthenticationForm()
+        form = CustomAuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.user.role == 'customer':
+        sales = Sale.objects.filter(customer=request.user)
+    else:
+        sales = None
+    return render(request, 'users/profile.html', {'sales': sales})
 
 @login_required
 def export_users_excel(request):
@@ -55,7 +58,7 @@ def export_users_excel(request):
     for user in users:
         ws.append([user.username, user.RUT, user.get_role_display()])
 
-    response = HttpResponse(content_type='application/ms-excel')
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename="usuarios.xlsx"'
     wb.save(response)
     return response

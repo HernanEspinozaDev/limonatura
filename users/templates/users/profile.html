@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Perfil de Usuario</h2>
+  <p><strong>Nombre de Usuario:</strong> {{ user.username }}</p>
+  <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
+  <p><strong>RUT:</strong> {{ user.RUT }}</p>
+  <p><strong>Rol:</strong> {{ user.get_role_display }}</p>
+
+  {% if sales %}
+    <h3>Historial de Compras</h3>
+    <ul>
+      {% for sale in sales %}
+        <li>
+          Venta #{{ sale.id }} - Fecha: {{ sale.date }} - Total: ${{ sale.total_value }}
+          <a href="{% url 'order_confirmation' sale.id %}">Ver Detalles</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No has realizado ninguna compra aún.</p>
+  {% endif %}
+{% endblock %}

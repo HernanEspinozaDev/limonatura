@@ -1,4 +1,4 @@
-# apps/sales/urls.py
+# sales/urls.py
 
 from django.urls import path
 from . import views
