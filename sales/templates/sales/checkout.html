@@ -1,30 +1,68 @@
+<!-- limonatura/sales/templates/sales/checkout.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Checkout</h2>
-  <form method="post">
-    {% csrf_token %}
-    <h3>Resumen de Compra</h3>
-    <table>
-      <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-      </tr>
-      {% for item in cart_items %}
-      <tr>
-        <td>{{ item.product.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>${{ item.subtotal }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <p><strong>Total:</strong> ${{ total }}</p>
-    <h3>Opciones de Entrega</h3>
-    <label><input type="radio" name="delivery_option" value="retiro" required> Retiro en Tienda</label><br>
-    <label><input type="radio" name="delivery_option" value="despacho"> Despacho a Domicilio</label>
-    <h3>Método de Pago</h3>
-    <label><input type="radio" name="payment_method" value="tarjeta" required> Tarjeta de Débito</label>
-    <button type="submit">Confirmar Compra</button>
-  </form>
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+    <form method="post" class="checkout-form">
+      {% csrf_token %}
+      <div class="checkout-summary">
+        <h3>Resumen de Compra</h3>
+        <table class="checkout-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart_items %}
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.subtotal }}</td>
+              <td>${{ item.subtotal }}</td> <!-- Aquí puedes ajustar si necesitas un cálculo diferente -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p><strong>Total:</strong> ${{ total }}</p>
+      </div>
+
+      <div class="checkout-options">
+        <h3>Opciones de Entrega</h3>
+        <div class="delivery-option">
+          <label>
+            <input type="radio" name="delivery_option" value="retiro" required>
+            Retiro en Tienda
+          </label>
+        </div>
+        <div class="delivery-option">
+          <label>
+            <input type="radio" name="delivery_option" value="despacho">
+            Despacho a Domicilio
+          </label>
+        </div>
+
+        <h3>Método de Pago</h3>
+        <div class="payment-method">
+          <label>
+            <input type="radio" name="payment_method" value="tarjeta" required>
+            Tarjeta de Débito
+          </label>
+        </div>
+        <!-- Nueva opción de pago en efectivo -->
+        <div class="payment-method">
+          <label>
+            <input type="radio" name="payment_method" value="efectivo" required>
+            Pago en Efectivo
+          </label>
+        </div>
+        <button type="submit" class="btn-confirm">Confirmar Compra</button>
+      </div>
+    </form>
+  </div>
 {% endblock %}

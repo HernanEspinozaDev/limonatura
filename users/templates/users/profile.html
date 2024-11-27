@@ -1,23 +1,31 @@
+<!-- limonatura/users/templates/users/profile.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Perfil de Usuario</h2>
-  <p><strong>Nombre de Usuario:</strong> {{ user.username }}</p>
-  <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
-  <p><strong>RUT:</strong> {{ user.RUT }}</p>
-  <p><strong>Rol:</strong> {{ user.get_role_display }}</p>
+  <div class="profile-container">
+    <h2 class="profile-title"><i class="fas fa-user-circle"></i> Perfil de Usuario</h2>
+    <div class="profile-details">
+      <p><i class="fas fa-user"></i> <strong>Nombre de Usuario:</strong> {{ user.username }}</p>
+      <p><i class="fas fa-envelope"></i> <strong>Correo Electrónico:</strong> {{ user.email }}</p>
+      <p><i class="fas fa-id-card"></i> <strong>RUT:</strong> {{ user.RUT }}</p>
+      <p><i class="fas fa-user-tag"></i> <strong>Rol:</strong> {{ user.get_role_display }}</p>
+    </div>
 
-  {% if sales %}
-    <h3>Historial de Compras</h3>
-    <ul>
-      {% for sale in sales %}
-        <li>
-          Venta #{{ sale.id }} - Fecha: {{ sale.date }} - Total: ${{ sale.total_value }}
-          <a href="{% url 'order_confirmation' sale.id %}">Ver Detalles</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No has realizado ninguna compra aún.</p>
-  {% endif %}
+    {% if sales %}
+      <div class="purchase-history">
+        <h3><i class="fas fa-history"></i> Historial de Compras</h3>
+        <ul class="history-list">
+          {% for sale in sales %}
+            <li class="history-item">
+              <span>Venta #{{ sale.id }} - Fecha: {{ sale.date }} - Total: ${{ sale.total_value }}</span>
+              <a href="{% url 'order_confirmation' sale.id %}" class="btn btn-secondary"><i class="fas fa-eye"></i> Ver Detalles</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% else %}
+      <p>No has realizado ninguna compra aún.</p>
+    {% endif %}
+  </div>
 {% endblock %}

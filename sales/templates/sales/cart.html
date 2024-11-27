@@ -1,31 +1,75 @@
-<!-- templates/sales/cart.html -->
+<!-- limonatura/sales/templates/sales/cart.html -->
 
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Carrito de Compras</h2>
-  <form method="post" action="{% url 'checkout' %}">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-      </tr>
-      {% for item in cart_items %}
-      <tr>
-        <td>{{ item.product.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>${{ item.subtotal }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    <p>Total: ${{ total }}</p>
-    <h3>Opciones de Entrega</h3>
-    <label><input type="radio" name="delivery_option" value="retiro" required> Retiro en Tienda</label><br>
-    <label><input type="radio" name="delivery_option" value="despacho"> Despacho a Domicilio</label>
-    <h3>Método de Pago</h3>
-    <label><input type="radio" name="payment_method" value="tarjeta" required> Tarjeta de Débito</label>
-    <button type="submit">Realizar Compra</button>
-  </form>
+  <div class="cart-container">
+    <h2>Carrito de Compras</h2>
+    <form method="post" action="{% url 'update_cart' %}" class="cart-form">
+      {% csrf_token %}
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+          <tr>
+            <td>{{ item.product.name }}</td>
+            <td>
+              <input type="number" name="quantity_{{ item.product.id }}" value="{{ item.quantity }}" min="1" class="cart-quantity-input">
+            </td>
+            <td>${{ item.subtotal }}</td>
+            <td>
+              <button type="submit" name="remove_{{ item.product.id }}" value="remove" class="btn-remove">Eliminar</button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="cart-summary">
+        <p>Total: <span>${{ total }}</span></p>
+        <button type="submit" class="btn-update">Actualizar Carrito</button>
+      </div>
+    </form>
+
+    <div class="delivery-options">
+      <h3>Opciones de Entrega</h3>
+      <form method="post" action="{% url 'checkout' %}" class="delivery-form">
+        {% csrf_token %}
+        <div class="delivery-option">
+          <label>
+            <input type="radio" name="delivery_option" value="retiro" required>
+            Retiro en Tienda
+          </label>
+        </div>
+        <div class="delivery-option">
+          <label>
+            <input type="radio" name="delivery_option" value="despacho">
+            Despacho a Domicilio
+          </label>
+        </div>
+
+        <h3>Método de Pago</h3>
+        <div class="payment-method">
+          <label>
+            <input type="radio" name="payment_method" value="tarjeta" required>
+            Tarjeta de Débito
+          </label>
+        </div>
+        <!-- Nueva opción de pago en efectivo -->
+        <div class="payment-method">
+          <label>
+            <input type="radio" name="payment_method" value="efectivo" required>
+            Pago en Efectivo
+          </label>
+        </div>
+        <button type="submit" class="btn-checkout">Realizar Compra</button>
+      </form>
+    </div>
+  </div>
 {% endblock %}

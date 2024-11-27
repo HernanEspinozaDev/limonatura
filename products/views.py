@@ -1,13 +1,33 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product
+from .models import Product, Category
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 import openpyxl
 
+
 def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'products/product_list.html', {'products': products})
+    category_id = request.GET.get('category')
+    if category_id:
+        products = Product.objects.filter(category_id=category_id)
+    else:
+        products = Product.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'products/product_list.html', {
+        'products': products,
+        'categories': categories,
+        'selected_category': int(category_id) if category_id else None,
+    })
+
+def product_list_by_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    products = Product.objects.filter(category=category)
+    categories = Category.objects.all()
+    return render(request, 'products/product_list.html', {
+        'products': products,
+        'categories': categories,
+        'selected_category': category.id,
+    })
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)

@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'sales',     # Aplicación de ventas
 ]
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -128,10 +127,24 @@ USE_TZ = True
 
 # Archivos estáticos y multimedia
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# Directorios adicionales donde Django buscará archivos estáticos
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    # Puedes añadir más directorios si es necesario
+]
+
+# Directorio donde se recopilarán los archivos estáticos al ejecutar collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Archivos multimedia (uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# URL de inicio de sesión y redirección
+LOGIN_URL = '/users/login/'  # URL absoluta a tu vista de inicio de sesión
+LOGIN_REDIRECT_URL = 'checkout'  # Nombre de la ruta a la que se redirige después de iniciar sesión
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

@@ -1,12 +1,15 @@
-<!-- templates/users/register.html -->
+<!-- limonatura/users/templates/users/register.html -->
 
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Registro de Usuario</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrarse</button>
-  </form>
+  <div class="form-container">
+    <h2 class="form-title"><i class="fas fa-user-plus"></i> Registro de Usuario</h2>
+    <form method="post" class="form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary"><i class="fas fa-user-check"></i> Registrarse</button>
+    </form>
+    <p class="redirect-link">¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia Sesión aquí</a></p>
+  </div>
 {% endblock %}

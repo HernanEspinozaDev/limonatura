@@ -7,13 +7,20 @@ from captcha.fields import CaptchaField
 
 class CustomUserCreationForm(UserCreationForm):
     RUT = forms.CharField(max_length=12)
-    role = forms.ChoiceField(choices=CustomUser.ROLE_CHOICES)
     captcha = CaptchaField()
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'RUT', 'role', 'password1', 'password2')
+        fields = ('username', 'email', 'RUT', 'password1', 'password2')  # Elimina 'role' de aquí
 
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.role = 'customer'  # Asigna el rol 'customer' por defecto
+        if commit:
+            user.save()
+        return user
+
+    
     def clean_RUT(self):
         RUT = self.cleaned_data.get('RUT')
         if not validar_rut(RUT):

@@ -1,11 +1,15 @@
-<!-- templates/sales/order_confirmation.html -->
+<!-- limonatura/sales/templates/sales/order_confirmation.html -->
 
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Confirmación de Pedido</h2>
-  <p>Gracias por tu compra, {{ sale.customer.username }}.</p>
-  <p>Número de Venta: {{ sale.id }}</p>
-  <p>Total Pagado: ${{ sale.total_value }}</p>
-  <a href="{% url 'download_receipt' sale.id %}">Descargar Boleta Electrónica</a>
+  <div class="order-confirmation-container">
+    <h2>Confirmación de Pedido</h2>
+    <div class="order-details">
+      <p>Gracias por tu compra, <strong>{{ sale.customer.username }}</strong>.</p>
+      <p><strong>Número de Venta:</strong> {{ sale.id }}</p>
+      <p><strong>Total Pagado:</strong> ${{ sale.total_value }}</p>
+    </div>
+    <a href="{% url 'download_receipt' sale.id %}" class="btn-download">Descargar Boleta Electrónica</a>
+  </div>
 {% endblock %}

@@ -1,42 +1,73 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Limonatura</title>
     {% load static %}
+    <!-- Enlace a Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pjwC5U1cBVtdPZqq5hzKV1kyZp7YQny8F2hbqv+gptkVtFQFBR+z6vvprsvqN2vL/WLGaOeOvMYtBrq7qL6P2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    {% block extra_css %}
+    {% endblock %}
 </head>
 <body>
-    <header>
-        <h1>Limonatura</h1>
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}">Inicio</a></li>
-                <li><a href="{% url 'product_list' %}">Productos</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}">Perfil</a></li>
-                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
-                    <li><a href="{% url 'register' %}">Registrarse</a></li>
-                {% endif %}
-                <li><a href="{% url 'view_cart' %}">Carrito</a></li>
-            </ul>
-        </nav>
+    <header class="navbar">
+        <div class="container">
+            <!-- Navegación Izquierda -->
+            <nav class="nav-left">
+                <ul class="nav-links">
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'product_list' %}">Productos</a></li>
+                    <li><a href="{% url 'view_cart' %}">Carrito</a></li>
+                </ul>
+            </nav>
+
+            <!-- Logo en el Centro -->
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.webp' %}" alt="Limonatura Logo" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Navegación Derecha -->
+            <nav class="nav-right">
+                <ul class="nav-links">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}">Perfil</a></li>
+                        <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                        <li><a href="{% url 'register' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            <!-- Botón Hamburger para dispositivos móviles -->
+            <button class="hamburger" aria-label="Menú de navegación">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
-    <main>
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    
+    <main class="container">
         {% block content %}
         {% endblock %}
     </main>
-    <footer>
+    <footer class="footer">
         <p>&copy; 2024 Limonatura. Todos los derechos reservados.</p>
     </footer>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLeft = document.querySelector('.nav-left');
+        const navRight = document.querySelector('.nav-right');
+        hamburger.addEventListener('click', () => {
+            navLeft.classList.toggle('open');
+            navRight.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>

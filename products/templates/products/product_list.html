@@ -1,23 +1,39 @@
-<!-- templates/products/product_list.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Listado de Productos</h2>
+  <section class="featured-products">
+      <h2>Listado de Productos</h2>
 
-  {% if user.is_authenticated %}
-    {% if user.role == 'admin' or user.role == 'seller' %}
-      <a href="{% url 'export_stock_excel' %}">Descargar Reporte de Stock (Excel)</a>
-    {% endif %}
-  {% endif %}
+      <!-- Mostrar categorías para filtrar -->
+      <h3>Categorías</h3>
+      <div class="category-list">
+          <a href="{% url 'product_list' %}" class="category-card {% if not selected_category %}active{% endif %}">Todas</a>
+          {% for category in categories %}
+              <a href="?category={{ category.id }}" class="category-card {% if selected_category == category.id %}active{% endif %}">
+                  {{ category.name }}
+              </a>
+          {% endfor %}
+      </div>
 
-  <ul>
-    {% for product in products %}
-      <li>
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
-        <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
-        - ${{ product.price }}
-        - Stock: {{ product.stock }}
-      </li>
-    {% endfor %}
-  </ul>
+      {% if user.is_authenticated %}
+        {% if user.role == 'admin' or user.role == 'seller' %}
+          <div class="export-button">
+              <a href="{% url 'export_stock_excel' %}" class="button">Descargar Reporte de Stock (Excel)</a>
+          </div>
+        {% endif %}
+      {% endif %}
+
+      <div class="product-list">
+          {% for product in products %}
+              <div class="product-card">
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                  <h3>{{ product.name }}</h3>
+                  <p>${{ product.price }}</p>
+                  <p>Stock: {{ product.stock }}</p>
+                  <p>Categoría: {{ product.category.name }}</p>
+                  <a href="{% url 'product_detail' product.pk %}" class="button">Ver más</a>
+              </div>
+          {% endfor %}
+      </div>
+  </section>
 {% endblock %}

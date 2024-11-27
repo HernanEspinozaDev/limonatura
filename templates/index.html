@@ -1,16 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Bienvenido a Limonatura</h2>
-    <p>Tu tienda en línea de productos naturales.</p>
-    <h3>Productos Destacados</h3>
-    <ul>
-        {% for product in products %}
-            <li>
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
-                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
-                - ${{ product.price }}
-            </li>
-        {% endfor %}
-    </ul>
+  <section class="hero">
+      <h1>Bienvenido a Limonatura</h1>
+      <p>Tu tienda en línea de productos naturales.</p>
+      <a href="{% url 'product_list' %}" class="cta-button">Ver Productos</a>
+  </section>
+
+  <section class="categories">
+      <h2>Categorías</h2>
+      <div class="category-list">
+          {% for category in categories %}
+              <a href="{% url 'product_list' %}?category={{ category.id }}" class="category-card">
+                  {{ category.name }}
+              </a>
+          {% endfor %}
+      </div>
+  </section>
+
+  <section class="featured-products">
+      <h2>Productos Destacados</h2>
+      <div class="product-list">
+          {% for product in products %}
+              <div class="product-card">
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                  <h3>{{ product.name }}</h3>
+                  <p>${{ product.price }}</p>
+                  <a href="{% url 'product_detail' product.pk %}" class="button">Ver más</a>
+              </div>
+          {% endfor %}
+      </div>
+  </section>
 {% endblock %}

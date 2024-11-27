@@ -1,16 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>{{ product.name }}</h2>
-  <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
-  <p>{{ product.description }}</p>
-  <p><strong>Precio:</strong> ${{ product.price }}</p>
-  <p><strong>Stock:</strong> {{ product.stock }}</p>
-  <a href="{% url 'add_to_cart' product.id %}">Añadir al Carrito</a>
-
-  {% if user.is_authenticated %}
-    {% if user.role == 'admin' %}
-      <a href="{% url 'product_update' product.id %}">Editar Producto</a>
-    {% endif %}
-  {% endif %}
+  <div class="product-detail-container">
+    <h2>{{ product.name }}</h2>
+    <div class="product-info">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+      <div class="product-details">
+        <p><strong>Categoría:</strong> {{ product.category.name }}</p>
+        <p>{{ product.description }}</p>
+        <p><strong>Precio:</strong> ${{ product.price }}</p>
+        <p><strong>Stock:</strong> {{ product.stock }}</p>
+      </div>
+    </div>
+    <div class="product-actions">
+      <a href="{% url 'add_to_cart' product.id %}" class="btn-action">Añadir al Carrito</a>
+      
+      {% if user.is_authenticated %}
+        {% if user.role == 'admin' %}
+          <a href="{% url 'product_update' product.id %}" class="btn-action">Editar Producto</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}

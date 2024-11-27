@@ -1,0 +1,1133 @@
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Estilos del Navbar */
+.navbar {
+    background-color: #4CAF50;
+    padding: 40px 0; /* Aumentar el padding vertical para agrandar el navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opcional: Añadir sombra al navbar */
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative; /* Para posicionar el logo en el centro */
+}
+
+/* Estilos de las listas de navegación */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* Incrementar el espacio entre enlaces si lo deseas */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    padding: 10px 15px; /* Aumentar el padding para mayor clickabilidad */
+    transition: background-color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    background-color: #3E8E41;
+    border-radius: 5px;
+}
+
+/* Navegación Izquierda y Derecha */
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-left {
+    justify-content: flex-start;
+}
+
+.nav-right {
+    justify-content: flex-end;
+}
+
+/* Logo en el Centro */
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo-img {
+    height: 80px; /* Aumentar la altura del logo para que se ajuste al nuevo navbar */
+    width: auto; /* Mantiene la proporción del logo */
+    object-fit: contain;
+}
+
+/* Botón Hamburger */
+.hamburger {
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.hamburger span {
+    height: 4px; /* Aumentar el grosor de las líneas del hamburger */
+    width: 30px; /* Aumentar el ancho de las líneas del hamburger */
+    background: white;
+    margin-bottom: 6px; /* Aumentar el espacio entre líneas */
+    border-radius: 5px;
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    .nav-left,
+    .nav-right {
+        display: none; /* Ocultar las opciones de navegación en móviles */
+    }
+
+    .hamburger {
+        display: flex; /* Mostrar el botón hamburger en móviles */
+    }
+
+    .nav-left.open,
+    .nav-right.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px; /* Ajustar según la nueva altura del navbar */
+        left: 0;
+        right: 0;
+        background-color: #4CAF50;
+        padding: 20px; /* Aumentar el padding para mayor espacio */
+        gap: 10px; /* Espacio entre enlaces en el menú desplegable */
+    }
+
+    /* Ajustes del Logo en Móviles */
+    .logo {
+        position: relative;
+        left: 0;
+        transform: none;
+        margin: 0 auto 10px auto; /* Centrar y añadir margen inferior */
+    }
+
+    .logo-img {
+        height: 60px; /* Ajustar el tamaño del logo en móviles si es necesario */
+    }
+}
+
+/* Sección Hero */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f4f4f4;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero .cta-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Asegurar que el botón se comporte como bloque en línea */
+    margin-top: 20px; /* Añadir margen superior */
+}
+
+.hero .cta-button:hover {
+    background-color: #3E8E41;
+}
+
+/* Sección Categorías */
+.categories {
+    margin: 30px 0;
+}
+
+.categories h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.category-list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar las categorías */
+}
+
+.category-card {
+    background: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    flex: 1 1 calc(33.33% - 15px);
+    transition: background-color 0.3s ease;
+    min-width: 150px; /* Asegurar un ancho mínimo */
+}
+
+.category-card:hover {
+    background-color: #e0e0e0;
+}
+
+/* Sección Productos Destacados */
+.featured-products {
+    margin: 30px 0;
+}
+
+.featured-products h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar los productos */
+}
+
+.product-card {
+    flex: 1 1 calc(33.33% - 15px);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    min-width: 250px; /* Asegurar un ancho mínimo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 5px;
+    max-height: 200px; /* Limitar la altura de las imágenes */
+    object-fit: cover;
+}
+
+.product-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.2rem;
+}
+
+.product-card p {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.product-card .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Asegurar que el botón se comporte como bloque en línea */
+    margin-top: auto; /* Empujar el botón hacia abajo */
+}
+
+.product-card .button:hover {
+    background-color: #3E8E41;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Añadir margen superior al contenedor principal para evitar superposición con el navbar */
+main.container {
+    margin-top: 20px; /* Ajusta este valor según la altura del navbar */
+}
+
+/* products/static/css/product_list.css */
+
+/* Estilos para la Sección de Productos */
+.featured-products {
+    margin: 30px 0;
+}
+
+.featured-products h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.category-list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar las categorías */
+    margin-bottom: 30px;
+}
+
+.category-card {
+    background: #f0f0f0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 150px; /* Asegurar un ancho mínimo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-card.active,
+.category-card:hover {
+    background-color: #3E8E41;
+    color: white;
+}
+
+.export-button {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.export-button .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.export-button .button:hover {
+    background-color: #3E8E41;
+}
+
+.product-list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar los productos */
+}
+
+.product-card {
+    flex: 1 1 calc(33.33% - 40px); /* Ajuste para el gap */
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    min-width: 250px; /* Asegurar un ancho mínimo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 5px;
+    max-height: 200px; /* Limitar la altura de las imágenes */
+    object-fit: cover;
+}
+
+.product-card h3 {
+    margin: 15px 0 10px;
+    font-size: 1.2rem;
+}
+
+.product-card p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.product-card .button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Asegurar que el botón se comporte como bloque en línea */
+    margin-top: auto; /* Empujar el botón hacia abajo */
+}
+
+.product-card .button:hover {
+    background-color: #3E8E41;
+}
+
+/* --- Estilos para la Página de Creación de Producto (product_create.html) --- */
+
+/* Contenedor principal de la creación de producto */
+.product-create-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la página de creación */
+.product-create-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Formulario de creación de producto */
+.product-create-container .product-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para los campos del formulario */
+.product-create-container .product-form p {
+    margin-bottom: 15px;
+}
+
+.product-create-container .product-form input,
+.product-create-container .product-form textarea,
+.product-create-container .product-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.product-create-container .product-form input:focus,
+.product-create-container .product-form textarea:focus,
+.product-create-container .product-form select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Botón de envío del formulario */
+.product-create-container .btn-submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-create-container .btn-submit:hover {
+    background-color: #3E8E41;
+}
+
+/* --- Estilos para la Página de Detalle de Producto (product_detail.html) --- */
+
+/* Contenedor principal del detalle del producto */
+.product-detail-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del producto */
+.product-detail-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Información del producto */
+.product-detail-container .product-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.product-detail-container .product-info .product-image {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.product-detail-container .product-info .product-details {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #555555;
+}
+
+.product-detail-container .product-details p {
+    margin-bottom: 10px;
+}
+
+/* Acciones del producto (botones) */
+.product-detail-container .product-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.product-detail-container .btn-action {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.product-detail-container .btn-action:hover {
+    background-color: #3E8E41;
+}
+
+/* --- Estilos para la Página de Actualización de Producto (product_update.html) --- */
+
+/* Contenedor principal de la actualización de producto */
+.product-update-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título de la página de actualización */
+.product-update-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Formulario de actualización de producto */
+.product-update-container .product-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para los campos del formulario */
+.product-update-container .product-form p {
+    margin-bottom: 15px;
+}
+
+.product-update-container .product-form input,
+.product-update-container .product-form textarea,
+.product-update-container .product-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.product-update-container .product-form input:focus,
+.product-update-container .product-form textarea:focus,
+.product-update-container .product-form select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Botón de envío del formulario */
+.product-update-container .btn-submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.product-update-container .btn-submit:hover {
+    background-color: #3E8E41;
+}
+
+
+/* --- Estilos para la Página del Carrito de Compras (cart.html) --- */
+
+/* Contenedor principal del carrito */
+.cart-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del carrito */
+.cart-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Formulario del carrito */
+.cart-form {
+    width: 100%;
+}
+
+/* Tabla del carrito */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+}
+
+.cart-table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.cart-quantity-input {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+.cart-quantity-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Botones del carrito */
+.btn-remove {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-remove:hover {
+    background-color: #c0392b;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cart-summary p {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.cart-summary span {
+    font-weight: bold;
+}
+
+.btn-update {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-update:hover {
+    background-color: #3E8E41;
+}
+
+/* Opciones de entrega y método de pago */
+.delivery-options {
+    margin-top: 40px;
+}
+
+.delivery-options h3 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.delivery-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.delivery-option label,
+.payment-method label {
+    font-size: 1rem;
+    color: #555;
+}
+
+.btn-checkout {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.btn-checkout:hover {
+    background-color: #0b7dda;
+}
+
+/* --- Estilos para la Página de Checkout (checkout.html) --- */
+
+/* Contenedor principal del checkout */
+.checkout-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del checkout */
+.checkout-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Formulario del checkout */
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Resumen de compra */
+.checkout-summary {
+    width: 100%;
+}
+
+.checkout-summary h3 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.checkout-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.checkout-table th,
+.checkout-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+}
+
+.checkout-table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Opciones de entrega y método de pago */
+.checkout-options h3 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.delivery-option label,
+.payment-method label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.btn-confirm {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.btn-confirm:hover {
+    background-color: #0b7dda;
+}
+
+/* --- Estilos para la Página de Confirmación de Pedido (order_confirmation.html) --- */
+
+/* Contenedor principal de la confirmación de pedido */
+.order-confirmation-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Título de confirmación */
+.order-confirmation-container h2 {
+    color: #4CAF50;
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+/* Detalles del pedido */
+.order-details {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.order-details p {
+    margin-bottom: 10px;
+}
+
+/* Botón de descarga de boleta */
+.btn-download {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-download:hover {
+    background-color: #3E8E41;
+}
+
+/* --- Estilos para la Plantilla de Recibo (receipt.html) --- */
+
+/* Nota: La plantilla receipt.html ya incluye estilos básicos. Asegúrate de mantenerlos simples y claros para la generación del PDF. */
+
+/* Puedes mantener los estilos existentes o ajustarlos según tus necesidades específicas. */
+
+/* --- Estilos para las Páginas de Usuarios (login.html, register.html, profile.html) --- */
+
+/* Contenedor principal para formularios de inicio de sesión y registro */
+.form-container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Títulos con iconos */
+.form-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Estilos para formularios */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Estilos para cada grupo de formulario */
+.form p {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.form p label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333333;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.form p input {
+    width: 100%;
+    padding: 12px 12px 12px 40px; /* Espacio para el icono */
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Iconos dentro de los campos de entrada */
+.form p label i {
+    position: absolute;
+    top: 35px;
+    left: 10px;
+    color: #4CAF50;
+}
+
+/* Foco en los campos de entrada */
+.form p input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    outline: none;
+}
+
+/* Botones */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #3E8E41;
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+}
+
+.btn-primary:hover {
+    background-color: #3E8E41;
+}
+
+.btn-secondary {
+    background-color: #2196F3;
+}
+
+.btn-secondary:hover {
+    background-color: #0b7dda;
+}
+
+/* Enlaces de redirección */
+.redirect-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #555555;
+}
+
+.redirect-link a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.redirect-link a:hover {
+    color: #3E8E41;
+}
+
+/* Perfil de Usuario */
+.profile-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.profile-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.profile-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.profile-details p {
+    font-size: 1.1rem;
+    color: #555555;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Historial de Compras */
+.purchase-history {
+    margin-top: 30px;
+}
+
+.purchase-history h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.history-item:hover {
+    background-color: #f1f1f1;
+}
+
+.history-item span {
+    font-weight: 600;
+    color: #333333;
+}
+
+/* --- Animaciones y Transiciones --- */
+
+/* Animación para el contenedor principal */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-container,
+.profile-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Transición suave para inputs y botones */
+.form p input,
+.btn {
+    transition: all 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .form-container,
+    .profile-container {
+        padding: 20px;
+    }
+
+    .form p label i {
+        top: 30px;
+    }
+
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .history-item a.btn {
+        align-self: flex-end;
+    }
+}

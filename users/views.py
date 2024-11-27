@@ -25,16 +25,20 @@ def user_login(request):
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             # Autenticar y loguear al usuario
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('index')
-        messages.error(request, 'Usuario o contraseña incorrectos.')
+            user = form.get_user()
+            login(request, user)
+            # Redirigir a la URL 'next' si existe
+            next_url = request.GET.get('next')
+            if next_url:
+                return redirect(next_url)
+            else:
+                return redirect('index')  # O donde desees redirigir si no hay 'next'
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos.')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
+
 
 @login_required
 def profile(request):
